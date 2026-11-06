@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — CampusCode Arena</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandCanvas: '#f7f7f4',
+            brandBorder: '#deded8',
+            brandPurple: '#7665ff',
+            brandPurpleHover: '#6351f0',
+            brandLime: '#a8e62e',
+            brandLimeDark: '#82b91a',
+            brandBlack: '#111111',
+            brandMuted: '#666666'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"DM Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brandCanvas text-brandBlack font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-brandLime selection:text-brandBlack">
+
+  <header class="border-b border-brandBorder bg-brandCanvas py-4 px-6 sm:px-12 flex justify-between items-center">
+    <a href="index.html" class="flex items-center gap-3">
+      <div class="flex items-center">
+        <span class="logo-slash slash-black"></span>
+        <span class="logo-slash slash-purple"></span>
+        <span class="logo-slash slash-lime"></span>
+      </div>
+      <span class="font-extrabold text-lg tracking-tight text-brandBlack font-sans">CAMPUSCODE</span>
+    </a>
+    <div class="flex items-center gap-4 text-xs font-mono text-brandMuted">
+      <a href="index.html" class="hover:text-brandBlack transition-colors">← RETURN TO HOME</a>
+    </div>
+  </header>
+
+  <main class="flex-grow flex items-center justify-center p-6 sm:p-12">
+    <div class="max-w-5xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- LEFT BRAND GRAPHIC COLUMN -->
+      <div class="lg:col-span-7 flex flex-col justify-center">
+        <span class="font-mono text-xs font-semibold uppercase tracking-widest text-brandPurple mb-4 flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-brandLime"></span>
+          REBUILD '26 ACCESS PORTAL
+        </span>
+        
+        <h1 class="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tighter leading-none text-brandBlack mb-6">
+          ENTER<br>
+          THE<br>
+          <span class="text-brandPurple">ARENA.</span>
+        </h1>
+        
+        <p class="text-base sm:text-lg text-brandMuted max-w-md leading-relaxed mb-8">
+          Sign in to access your student dashboard, view your registered hackathons, submit project deliverables, and track real-time scores.
+        </p>
+
+        <div class="inline-flex items-center gap-3 p-3 bg-white border border-brandBorder rounded-lg text-xs font-mono text-brandMuted max-w-sm">
+          <span class="text-brandBlack font-bold">TAGLINE:</span> BUILD • COMPETE • SHIP
+        </div>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="bg-white border border-brandBorder rounded-2xl p-8 sm:p-10 shadow-sm relative overflow-hidden">
+          
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <h2 class="text-2xl font-black text-brandBlack tracking-tight">LOGIN</h2>
+              <p class="font-mono text-xs text-brandMuted mt-1">Access your student account</p>
+            </div>
+            <span class="font-mono text-xs text-brandPurple bg-brandPurple/10 px-2 py-1 rounded">STUDENT</span>
+          </div>
+
+          <form id="login-form" onsubmit="handleLogin(event)" class="space-y-5">
+            <div>
+              <label for="email" class="block text-xs font-mono font-medium text-brandBlack uppercase tracking-wider mb-2">
+                Student Email Address
+              </label>
+              <input 
+                type="email" 
+                id="email" 
+                required 
+                placeholder="sai@campuscode.co.in" 
+                class="w-full px-4 py-3 bg-brandCanvas/40 border border-brandBorder rounded-lg text-sm text-brandBlack placeholder-gray-400 focus:outline-none focus:border-brandPurple focus:ring-1 focus:ring-brandPurple font-sans transition-all"
+                value="sai@campuscode.co.in"
+              >
+            </div>
+
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <label for="password" class="block text-xs font-mono font-medium text-brandBlack uppercase tracking-wider">
+                  Password
+                </label>
+                <a href="#" onclick="showToast('Password reset link sent to registered email'); return false;" class="text-[11px] font-mono text-brandPurple hover:underline">
+                  Forgot?
+                </a>
+              </div>
+              <div class="relative">
+                <input 
+                  type="password" 
+                  id="password" 
+                  required 
+                  placeholder="••••••••••••" 
+                  value="password123"
+                  class="w-full px-4 py-3 bg-brandCanvas/40 border border-brandBorder rounded-lg text-sm text-brandBlack placeholder-gray-400 focus:outline-none focus:border-brandPurple focus:ring-1 focus:ring-brandPurple font-sans transition-all"
+                >
+                <button 
+                  type="button" 
+                  onclick="togglePasswordVisibility()" 
+                  class="absolute right-3 top-3 text-xs font-mono text-brandMuted hover:text-brandBlack"
+                >
+                  SHOW
+                </button>
+              </div>
+            </div>
+
+            <div class="p-3 border border-brandBorder rounded-lg bg-brandCanvas/30 flex items-center justify-between">
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input 
+                  type="checkbox" 
+                  id="captcha" 
+                  required 
+                  checked
+                  class="w-4 h-4 text-brandPurple rounded border-brandBorder focus:ring-brandPurple cursor-pointer"
+                >
+                <span class="text-xs font-mono text-brandBlack select-none">I am not a robot (Captcha)</span>
+              </label>
+              <span class="font-mono text-[10px] text-brandMuted">CAMPUS_SEC</span>
+            </div>
+
+            <button 
+              type="submit" 
+              id="submit-btn" 
+              class="w-full py-3.5 px-4 bg-brandBlack text-white hover:bg-brandPurple font-mono text-xs uppercase tracking-wider rounded-lg font-semibold transition-all flex items-center justify-center gap-2 shadow-sm"
+            >
+              <span>ENTER ARENA</span>
+              <span>↗</span>
+            </button>
+          </form>
+
+          <!-- Divider -->
+          <div class="mt-8 pt-6 border-t border-brandBorder text-center">
+            <p class="text-xs text-brandMuted font-mono">
+              Don't have an account? 
+              <a href="register.html" class="text-brandBlack font-semibold hover:text-brandPurple underline ml-1">
+                Register here ↗
+              </a>
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-brandBorder bg-brandCanvas py-6 text-center text-xs font-mono text-brandMuted">
+    © 2026 CAMPUSCODE | LEARN - BUILD - COMPETE - SHIP | CHENNAI - INDIA
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    function togglePasswordVisibility() {
+      const pass = document.getElementById('password');
+      if (pass.type === 'password') {
+        pass.type = 'text';
+      } else {
+        pass.type = 'password';
+      }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const btn = document.getElementById('submit-btn');
+
+      btn.disabled = true;
+      btn.innerHTML = `
+        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+        </svg>
+        <span>AUTHENTICATING...</span>
+      `;
+
+      const existingUser = Auth.getUser();
+      const namePart = email.split('@')[0];
+      const displayName = existingUser && existingUser.fullName ? existingUser.fullName : (namePart ? namePart.toUpperCase() : 'SAI');
+
+      Auth.setUser({
+        fullName: displayName,
+        email: email,
+        role: 'STUDENT',
+        studentId: 'CC-2026-8941',
+        teamName: 'TEAM CAMPUSCODE'
+      });
+
+      setTimeout(() => {
+        showToast('Login successful! Redirecting to Dashboard...', 'success');
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 600);
+      }, 700);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusCode — ReBuild '26 | Recreate & Rebuild Hackathon</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandCanvas: '#f7f7f4',
+            brandBorder: '#deded8',
+            brandPurple: '#7665ff',
+            brandPurpleHover: '#6351f0',
+            brandLime: '#a8e62e',
+            brandLimeDark: '#82b91a',
+            brandBlack: '#111111',
+            brandMuted: '#666666'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"DM Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brandCanvas text-brandBlack font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-brandLime selection:text-brandBlack">
+
+  <header class="border-b border-brandBorder bg-brandCanvas sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center text-xs font-mono tracking-wider text-brandMuted">
+      <div class="flex items-center gap-4">
+        <span class="text-brandBlack font-semibold">CAMPUSCODE / REBUILD '26</span>
+        <span class="hidden md:inline text-brandBorder">|</span>
+        <span class="hidden md:inline">HACKATHON ARENA</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span>REBUILD '26 | NOV 6-7</span>
+        <span class="text-brandBorder">|</span>
+        <span>CHENNAI | INDIA</span>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center border-t border-brandBorder">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="flex items-center">
+          <span class="logo-slash slash-black"></span>
+          <span class="logo-slash slash-purple"></span>
+          <span class="logo-slash slash-lime"></span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-extrabold text-xl tracking-tight text-brandBlack font-sans">CAMPUSCODE</span>
+          <span class="text-[9px] font-mono tracking-widest text-brandMuted -mt-1 hidden sm:block">THE DIGITAL HOME FOR STUDENT INNOVATION</span>
+        </div>
+      </a>
+
+      <!-- Navigation links -->
+      <nav class="hidden lg:flex items-center gap-8 font-mono text-xs uppercase tracking-wider text-brandMuted">
+        <a href="#about" class="hover:text-brandBlack transition-colors">01 What is CampusCode?</a>
+        <a href="#scope" class="hover:text-brandBlack transition-colors">02 Scope</a>
+        <a href="#schedule" class="hover:text-brandBlack transition-colors">04 Schedule</a>
+        <a href="dashboard.html" class="hover:text-brandPurple transition-colors text-brandBlack font-semibold">Student Dashboard ↗</a>
+      </nav>
+
+      <!-- Auth Action CTA -->
+      <div class="flex items-center gap-3">
+        <a href="login.html" class="px-4 py-2 text-xs font-mono uppercase tracking-wider border border-brandBorder rounded hover:border-brandBlack transition-all bg-white font-medium">
+          Login
+        </a>
+        <a href="register.html" class="px-4 py-2 text-xs font-mono uppercase tracking-wider bg-brandBlack text-white rounded hover:bg-brandPurple transition-all font-medium flex items-center gap-1 shadow-sm">
+          Register <span>↗</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
+      
+      <div class="mb-10">
+        <p class="font-mono text-xs text-brandPurple font-semibold uppercase tracking-widest mb-3 flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-brandLime pulse-indicator"></span>
+          CampusCode / ReBuild '26
+        </p>
+        <h1 class="text-7xl sm:text-8xl lg:text-9xl font-black tracking-tighter leading-none text-brandBlack">
+          REBUILD<br>
+          <span class="text-brandPurple">'26</span>
+        </h1>
+        
+        <div class="mt-6 max-w-3xl">
+          <h2 class="text-xl sm:text-2xl font-bold uppercase tracking-tight text-brandBlack">
+            Recreate & Rebuild Hackathon
+          </h2>
+          <p class="text-base sm:text-lg text-brandMuted mt-1">
+            Recreate it faithfully on Friday. Rebuild it beautifully on Saturday.<br>
+            <span class="font-mono text-sm text-brandBlack font-medium">Individual hackathon. Frontend only. Mock data fine.</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Ticker banner -->
+      <div class="py-3 px-4 border-y border-brandBorder bg-white flex items-center justify-between overflow-x-auto text-xs font-mono tracking-widest uppercase text-brandMuted mb-12">
+        <span>IDEAS</span>
+        <span class="text-brandBorder">•</span>
+        <span>PEOPLE</span>
+        <span class="text-brandBorder">•</span>
+        <span>PRODUCTS</span>
+        <span class="text-brandBorder">•</span>
+        <span>INNOVATION</span>
+        <span class="text-brandBorder">•</span>
+        <span>COMMUNITY</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+        
+        <div class="cc-card p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <span class="font-mono text-xs font-bold text-brandPurple">01</span>
+              <span class="font-mono text-xs text-brandMuted">↗</span>
+            </div>
+            <h3 class="text-2xl font-extrabold tracking-tight mb-2">INDIVIDUAL</h3>
+            <p class="text-sm text-brandMuted leading-relaxed">
+              You build alone. One submission per participant.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-brandBorder/60 flex items-center justify-between text-xs font-mono text-brandMuted">
+            <span>TRACK: FRONTEND</span>
+            <span class="text-brandBlack font-semibold">SOLO</span>
+          </div>
+        </div>
+
+        <div class="cc-card p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <span class="font-mono text-xs font-bold text-brandPurple">02</span>
+              <span class="font-mono text-xs text-brandMuted">↗</span>
+            </div>
+            <h3 class="text-2xl font-extrabold tracking-tight mb-2">FRONTEND ONLY</h3>
+            <p class="text-sm text-brandMuted leading-relaxed">
+              No backend needed. Mock data is fine. Focus on visual fidelity and desktop polish.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-brandBorder/60 flex items-center justify-between text-xs font-mono text-brandMuted">
+            <span>STACK: HTML/JS/CSS</span>
+            <span class="text-brandBlack font-semibold">NO SERVER</span>
+          </div>
+        </div>
+
+        <div class="cc-card p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <span class="font-mono text-xs font-bold text-brandPurple">03</span>
+              <span class="font-mono text-xs text-brandMuted">↗</span>
+            </div>
+            <h3 class="text-2xl font-extrabold tracking-tight mb-2">NOV 6-7</h3>
+            <p class="text-sm text-brandMuted leading-relaxed">
+              Round 1 Friday, Round 2 Saturday. Sunday free for Diwali.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-brandBorder/60 flex items-center justify-between text-xs font-mono text-brandMuted">
+            <span>SCHEDULE: IST</span>
+            <span class="text-brandBlack font-semibold">ONLINE</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-8 sm:p-14 border border-brandBorder bg-white rounded-2xl mb-20 relative overflow-hidden">
+        <div class="relative z-10">
+          <p class="font-mono text-xs font-semibold uppercase tracking-widest text-brandPurple mb-4">
+            CAMPUSCODE CORE PHILOSOPHY
+          </p>
+          <div class="text-6xl sm:text-8xl lg:text-9xl font-black tracking-tighter leading-none select-none">
+            <div class="text-brandBlack">BUILD</div>
+            <div class="text-outline">COMPETE</div>
+            <div class="text-brandBlack flex items-center gap-2">
+              SHIP<span class="text-brandPurple">.</span>
+            </div>
+          </div>
+          <p class="font-mono text-sm text-brandMuted mt-8 max-w-xl">
+            The modern digital arena connecting ambitious student developers, designers, and innovators to high-impact hackathons.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="dashboard.html" class="btn-primary px-6 py-3 text-sm font-mono uppercase tracking-wider">
+              Open Student Dashboard ↗
+            </a>
+            <a href="login.html" class="btn-outline px-6 py-3 text-sm font-mono uppercase tracking-wider">
+              Login to Submit
+            </a>
+          </div>
+        </div>
+
+        <div class="absolute right-[-20px] bottom-[-40px] opacity-10 pointer-events-none hidden sm:flex items-center gap-6">
+          <div class="w-16 h-96 bg-brandBlack transform skew-x-[-18deg]"></div>
+          <div class="w-16 h-96 bg-brandPurple transform skew-x-[-18deg]"></div>
+          <div class="w-16 h-96 bg-brandLime transform skew-x-[-18deg]"></div>
+        </div>
+      </div>
+
+      <section id="about" class="mb-20 pt-8 border-t border-brandBorder">
+        <div class="flex items-center gap-3 font-mono text-xs text-brandPurple font-semibold mb-4">
+          <span>01</span>
+          <span class="text-brandBorder">/</span>
+          <span>WHAT IS CAMPUSCODE?</span>
+        </div>
+
+        <h2 class="text-4xl sm:text-5xl font-black tracking-tight text-brandBlack mb-6">
+          WHERE STUDENTS BUILD.
+        </h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 text-brandMuted leading-relaxed">
+          <div>
+            <p class="text-lg text-brandBlack font-medium mb-4">
+              CampusCode is an AI-powered hackathon platform — one place to run and join hackathons, instead of juggling many tools.
+            </p>
+            <p class="mb-4">
+              The problem today: a college hackathon runs on scattered tools — a form for registration, WhatsApp for updates, spreadsheets for scores, certificates made manually. Judging is slow and opaque, and participants have no single place to track everything.
+            </p>
+            <div class="space-y-3 mt-6">
+              <div class="flex items-start gap-3">
+                <span class="inline-block w-2 h-2 rounded-full bg-brandPurple mt-2"></span>
+                <span><strong class="text-brandBlack">For students:</strong> Discover events, register, join hackathons, find teammates with HackMate, submit ideas and projects, track rounds and results, and get verifiable certificates and a Digital ID card with QR.</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="inline-block w-2 h-2 rounded-full bg-brandLimeDark mt-2"></span>
+                <span><strong class="text-brandBlack">For organisers:</strong> Create hackathons, manage registrations and approvals, run rounds, monitor submissions, and judge with AI help.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-5 bg-white border border-brandBorder rounded-xl">
+              <span class="font-mono text-xs text-brandPurple font-semibold">AI FEATURE 01</span>
+              <h4 class="font-bold text-lg text-brandBlack mt-1">IdeaCheck</h4>
+              <p class="text-xs text-brandMuted mt-1">Automated AI idea screening and preliminary feasibility scoring.</p>
+            </div>
+
+            <div class="p-5 bg-white border border-brandBorder rounded-xl">
+              <span class="font-mono text-xs text-brandPurple font-semibold">AI FEATURE 02</span>
+              <h4 class="font-bold text-lg text-brandBlack mt-1">HackMate</h4>
+              <p class="text-xs text-brandMuted mt-1">Smart teammate matchmaking by skills and CampusCode ID.</p>
+            </div>
+
+            <div class="p-5 bg-white border border-brandBorder rounded-xl">
+              <span class="font-mono text-xs text-brandPurple font-semibold">AI FEATURE 03</span>
+              <h4 class="font-bold text-lg text-brandBlack mt-1">RuleBot</h4>
+              <p class="text-xs text-brandMuted mt-1">Instant rule clarifications and eligibility guidelines assistance.</p>
+            </div>
+
+            <div class="p-5 bg-white border border-brandBorder rounded-xl">
+              <span class="font-mono text-xs text-brandPurple font-semibold">AI FEATURE 04</span>
+              <h4 class="font-bold text-lg text-brandBlack mt-1">R1/R2/R3 Analysers</h4>
+              <p class="text-xs text-brandMuted mt-1">Multi-stage progression tracking with student chatbot panel.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="schedule" class="mb-20 pt-8 border-t border-brandBorder">
+        <div class="flex items-center gap-3 font-mono text-xs text-brandPurple font-semibold mb-4">
+          <span>04</span>
+          <span class="text-brandBorder">/</span>
+          <span>HOW IT WORKS</span>
+        </div>
+
+        <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-brandBlack mb-6">
+          THE SCHEDULE. IN ONE TABLE.
+        </h2>
+        <p class="text-sm font-mono text-brandMuted mb-6">
+          All dates are November 2026, online, IST. All updates come first in the WhatsApp group.
+        </p>
+
+        <div class="overflow-x-auto border border-brandBorder rounded-xl bg-white">
+          <table class="w-full text-left border-collapse text-sm">
+            <thead>
+              <tr class="bg-brandBlack text-white font-mono text-xs uppercase tracking-wider">
+                <th class="py-3 px-4 border-r border-gray-700">DATE</th>
+                <th class="py-3 px-4 border-r border-gray-700">ROUND</th>
+                <th class="py-3 px-4 border-r border-gray-700">TIME</th>
+                <th class="py-3 px-4">WHAT HAPPENS</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-brandBorder font-sans text-xs sm:text-sm">
+              <tr class="hover:bg-brandCanvas/50">
+                <td class="py-3 px-4 font-mono font-medium text-brandBlack border-r border-brandBorder">Wed, 5 Nov</td>
+                <td class="py-3 px-4 font-medium border-r border-brandBorder">Get ready</td>
+                <td class="py-3 px-4 font-mono text-brandMuted border-r border-brandBorder">10 AM / 6 PM</td>
+                <td class="py-3 px-4 text-brandMuted">Rules + round details shared 10 AM; registrations close 6 PM</td>
+              </tr>
+              <tr class="bg-brandLime/10 hover:bg-brandLime/20 font-medium">
+                <td class="py-3 px-4 font-mono font-bold text-brandBlack border-r border-brandBorder">Fri, 6 Nov</td>
+                <td class="py-3 px-4 font-bold text-brandPurple border-r border-brandBorder flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-brandLime"></span> Round 1: Recreate
+                </td>
+                <td class="py-3 px-4 font-mono font-semibold border-r border-brandBorder">8 AM - 10 PM</td>
+                <td class="py-3 px-4 text-brandBlack">Recreate the 4 pages. Submit demo by 10 PM</td>
+              </tr>
+              <tr class="hover:bg-brandCanvas/50">
+                <td class="py-3 px-4 font-mono font-medium text-brandBlack border-r border-brandBorder">Fri, 6 Nov</td>
+                <td class="py-3 px-4 font-medium border-r border-brandBorder">Shortlist</td>
+                <td class="py-3 px-4 font-mono text-brandMuted border-r border-brandBorder">After 10 PM</td>
+                <td class="py-3 px-4 text-brandMuted">R2 shortlist posted in WhatsApp group + channel</td>
+              </tr>
+              <tr class="hover:bg-brandCanvas/50">
+                <td class="py-3 px-4 font-mono font-medium text-brandBlack border-r border-brandBorder">Sat, 7 Nov</td>
+                <td class="py-3 px-4 font-medium border-r border-brandBorder">Round 2: Rebuild</td>
+                <td class="py-3 px-4 font-mono text-brandMuted border-r border-brandBorder">10 AM - 8 PM</td>
+                <td class="py-3 px-4 text-brandMuted">Top performers only. Complete new UI. Submit by 8 PM</td>
+              </tr>
+              <tr class="hover:bg-brandCanvas/50 bg-gray-50/50">
+                <td class="py-3 px-4 font-mono font-medium text-brandMuted border-r border-brandBorder">Sun, 8 Nov</td>
+                <td class="py-3 px-4 text-brandMuted border-r border-brandBorder">Diwali</td>
+                <td class="py-3 px-4 font-mono text-brandMuted border-r border-brandBorder">-</td>
+                <td class="py-3 px-4 text-brandMuted italic">No round. Enjoy Diwali with family</td>
+              </tr>
+              <tr class="hover:bg-brandCanvas/50">
+                <td class="py-3 px-4 font-mono font-medium text-brandBlack border-r border-brandBorder">Mon, 9 Nov</td>
+                <td class="py-3 px-4 font-medium border-r border-brandBorder">Round 3: Interview</td>
+                <td class="py-3 px-4 font-mono text-brandMuted border-r border-brandBorder">-</td>
+                <td class="py-3 px-4 text-brandMuted">Interview shortlist given</td>
+              </tr>
+              <tr class="hover:bg-brandCanvas/50">
+                <td class="py-3 px-4 font-mono font-medium text-brandBlack border-r border-brandBorder">Tue-Wed 10-11 Nov</td>
+                <td class="py-3 px-4 font-medium border-r border-brandBorder">Certificates + R3</td>
+                <td class="py-3 px-4 font-mono text-brandMuted border-r border-brandBorder">-</td>
+                <td class="py-3 px-4 text-brandMuted">Participation certificates issued; R3 interviews continue</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="mb-20 pt-8 border-t border-brandBorder">
+        <div class="flex items-center gap-3 font-mono text-xs text-brandPurple font-semibold mb-4">
+          <span>09</span>
+          <span class="text-brandBorder">/</span>
+          <span>PRIZES</span>
+        </div>
+
+        <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-brandBlack mb-6">
+          WIN. AND GET RECOGNISED.
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div class="cc-card p-6 border-l-4 border-l-brandPurple">
+            <span class="font-mono text-xs font-bold text-brandPurple uppercase">PLACE 01</span>
+            <h3 class="text-2xl font-black mt-1 mb-2">WINNER</h3>
+            <p class="text-sm text-brandMuted">
+              Winner Certificate + CampusCode Internship with <strong class="text-brandBlack">₹15,000 stipend</strong>.
+            </p>
+          </div>
+
+          <div class="cc-card p-6 border-l-4 border-l-brandLimeDark">
+            <span class="font-mono text-xs font-bold text-brandLimeDark uppercase">PLACE 02</span>
+            <h3 class="text-2xl font-black mt-1 mb-2">RUNNER-UP</h3>
+            <p class="text-sm text-brandMuted">
+              Official Runner-up Certificate & CampusCode Hall of Fame entry.
+            </p>
+          </div>
+
+          <div class="cc-card p-6 border-l-4 border-l-brandBlack">
+            <span class="font-mono text-xs font-bold text-brandBlack uppercase">ALL ENTRIES</span>
+            <h3 class="text-2xl font-black mt-1 mb-2">PARTICIPANTS</h3>
+            <p class="text-sm text-brandMuted">
+              Verifiable Participation Certificates with encrypted digital ID.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="border border-brandBorder rounded-2xl bg-white p-8 sm:p-12 text-center">
+        <span class="font-mono text-xs font-semibold uppercase tracking-widest text-brandPurple">READY?</span>
+        <h2 class="text-4xl sm:text-5xl font-black tracking-tight text-brandBlack mt-2 mb-4">
+          YOUR NEXT PROJECT STARTS HERE.
+        </h2>
+        <p class="text-base text-brandMuted max-w-xl mx-auto mb-8">
+          Recreate it faithfully on Friday, rebuild it beautifully on Saturday. Good luck, builders.
+        </p>
+        <div class="flex flex-wrap justify-center items-center gap-4">
+          <a href="register.html" class="btn-primary px-8 py-3 text-sm font-mono uppercase tracking-wider">
+            Create CampusCode Account ↗
+          </a>
+          <a href="dashboard.html" class="btn-outline px-8 py-3 text-sm font-mono uppercase tracking-wider">
+            View Live Dashboard Demo
+          </a>
+        </div>
+      </section>
+
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-brandBorder bg-brandCanvas py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-brandMuted">
+      <div class="flex items-center gap-2">
+        <div class="flex items-center">
+          <span class="logo-slash slash-black" style="height: 14px; width: 3px;"></span>
+          <span class="logo-slash slash-purple" style="height: 14px; width: 3px;"></span>
+          <span class="logo-slash slash-lime" style="height: 14px; width: 3px;"></span>
+        </div>
+        <span class="font-semibold text-brandBlack">CampusCode</span>
+      </div>
+      <div>
+        © 2026 CAMPUSCODE | LEARN - BUILD - COMPETE - SHIP | CHENNAI - INDIA
+      </div>
+      <div class="flex gap-4">
+        <a href="login.html" class="hover:text-brandBlack">Login</a>
+        <a href="register.html" class="hover:text-brandBlack">Register</a>
+        <a href="dashboard.html" class="hover:text-brandBlack">Dashboard</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

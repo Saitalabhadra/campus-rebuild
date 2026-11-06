@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard — CampusCode</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandCanvas: '#f7f7f4',
+            brandBorder: '#deded8',
+            brandPurple: '#7665ff',
+            brandPurpleHover: '#6351f0',
+            brandLime: '#a8e62e',
+            brandLimeDark: '#82b91a',
+            brandBlack: '#111111',
+            brandMuted: '#666666'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"DM Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brandCanvas text-brandBlack font-sans antialiased min-h-screen selection:bg-brandLime selection:text-brandBlack">
+
+  <div class="flex min-h-screen">
+    
+    
+    <aside class="w-64 border-r border-brandBorder bg-white flex flex-col justify-between hidden md:flex sticky top-0 h-screen z-30">
+      <div>
+       
+        <div class="p-6 border-b border-brandBorder">
+          <a href="index.html" class="flex items-center gap-3">
+            <div class="flex items-center">
+              <span class="logo-slash slash-black"></span>
+              <span class="logo-slash slash-purple"></span>
+              <span class="logo-slash slash-lime"></span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-extrabold text-base tracking-tight text-brandBlack font-sans">CAMPUSCODE</span>
+              <span class="text-[8px] font-mono tracking-widest text-brandMuted -mt-0.5">STUDENT ARENA</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="p-4 space-y-1 font-mono text-xs uppercase tracking-wider">
+          <a href="#" onclick="switchTab('overview'); return false;" id="nav-overview" class="flex items-center justify-between px-3 py-2.5 rounded-lg bg-brandCanvas text-brandBlack font-semibold border border-brandBorder/80">
+            <span class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-brandPurple"></span>
+              <span>Overview</span>
+            </span>
+            <span class="text-[10px] text-brandMuted">01</span>
+          </a>
+
+          <a href="#" onclick="switchTab('my-events'); return false;" id="nav-my-events" class="flex items-center justify-between px-3 py-2.5 rounded-lg text-brandMuted hover:bg-brandCanvas hover:text-brandBlack transition-colors">
+            <span class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-brandLime"></span>
+              <span>My Events</span>
+            </span>
+            <span class="bg-brandCanvas px-1.5 py-0.5 rounded text-[10px] font-bold text-brandBlack">3</span>
+          </a>
+
+          <a href="#" onclick="switchTab('all-events'); return false;" id="nav-all-events" class="flex items-center justify-between px-3 py-2.5 rounded-lg text-brandMuted hover:bg-brandCanvas hover:text-brandBlack transition-colors">
+            <span class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-gray-300"></span>
+              <span>Events (Explore)</span>
+            </span>
+            <span class="text-[10px] text-brandMuted">↗</span>
+          </a>
+
+          <a href="#" onclick="openModal('digital-id-modal'); return false;" class="flex items-center justify-between px-3 py-2.5 rounded-lg text-brandMuted hover:bg-brandCanvas hover:text-brandBlack transition-colors">
+            <span class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-brandPurple/60"></span>
+              <span>Digital ID + QR</span>
+            </span>
+            <span class="text-[10px] text-brandLimeDark font-semibold">VERIFIED</span>
+          </a>
+
+          <a href="#" onclick="showToast('HackMate teammate discovery active — 4 matches found'); return false;" class="flex items-center justify-between px-3 py-2.5 rounded-lg text-brandMuted hover:bg-brandCanvas hover:text-brandBlack transition-colors">
+            <span class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-gray-300"></span>
+              <span>HackMate (AI)</span>
+            </span>
+            <span class="text-[10px] text-brandPurple font-semibold">NEW</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Bottom User Profile Card -->
+      <div class="p-4 border-t border-brandBorder">
+        <div class="p-3 bg-brandCanvas rounded-xl border border-brandBorder/80 mb-3">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-[10px] font-mono text-brandMuted">CAMPUSCODE ID</span>
+            <span class="flex items-center gap-1 text-[10px] font-mono text-brandLimeDark font-semibold">
+              <span class="w-1.5 h-1.5 rounded-full bg-brandLimeDark"></span> ACTIVE
+            </span>
+          </div>
+          <div class="font-mono text-xs font-bold text-brandBlack flex items-center justify-between">
+            <span id="user-cc-id">CC-2026-8941</span>
+            <button onclick="copyToClipboard('CC-2026-8941', 'CampusCode ID copied!')" class="text-brandPurple hover:underline text-[10px]">COPY</button>
+          </div>
+        </div>
+
+        <button onclick="Auth.logout()" class="w-full py-2 px-3 text-xs font-mono text-brandMuted hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors flex items-center justify-center gap-2">
+          <span>LOGOUT</span>
+          <span>→</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN DASHBOARD CONTENT AREA -->
+    <main class="flex-1 flex flex-col min-w-0">
+      
+      <!-- TOP NAVIGATION BAR -->
+      <header class="border-b border-brandBorder bg-white sticky top-0 z-20 px-6 py-4 flex items-center justify-between">
+        
+        <!-- Mobile Logo & Greeting -->
+        <div class="flex items-center gap-4">
+          <div class="flex md:hidden items-center gap-2">
+            <span class="logo-slash slash-black" style="height: 16px; width: 3px;"></span>
+            <span class="logo-slash slash-purple" style="height: 16px; width: 3px;"></span>
+            <span class="logo-slash slash-lime" style="height: 16px; width: 3px;"></span>
+          </div>
+          <div>
+            <h1 class="text-xl sm:text-2xl font-black tracking-tight text-brandBlack flex items-center gap-2">
+              WELCOME BACK, <span id="welcome-username" class="text-brandPurple">SAI</span>.
+            </h1>
+            <p class="font-mono text-[11px] text-brandMuted -mt-0.5 hidden sm:block">
+              REBUILD '26 TRACKING ARENA • CHENNAI, INDIA
+            </p>
+          </div>
+        </div>
+
+       
+        <div class="flex items-center gap-3">
+          <button onclick="openModal('digital-id-modal')" class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 bg-brandCanvas border border-brandBorder rounded-lg text-xs font-mono hover:border-brandBlack transition-all">
+            <span class="w-2 h-2 rounded-full bg-brandLime pulse-indicator"></span>
+            <span>Digital ID QR ↗</span>
+          </button>
+
+          <button onclick="openModal('submit-modal')" class="px-4 py-1.5 bg-brandBlack text-white hover:bg-brandPurple rounded-lg text-xs font-mono uppercase tracking-wider font-semibold transition-all flex items-center gap-1.5 shadow-sm">
+            <span>Submit Entry</span>
+            <span>↗</span>
+          </button>
+
+         
+          <div class="w-9 h-9 rounded-full bg-brandPurple/10 border border-brandPurple text-brandPurple font-bold flex items-center justify-center text-xs font-mono ml-1">
+            SA
+          </div>
+        </div>
+      </header>
+
+     
+      <div class="p-6 sm:p-8 max-w-6xl w-full mx-auto space-y-8">
+
+      
+        <div class="bg-white border border-brandBorder rounded-2xl p-6 sm:p-8 shadow-sm relative overflow-hidden">
+          <div class="relative z-10">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-1 bg-brandPurple/10 text-brandPurple border border-brandPurple/20 rounded font-mono text-xs font-bold uppercase tracking-wider">
+                  ROUND 1 ACTIVE
+                </span>
+                <span class="px-2.5 py-1 bg-brandLime/20 text-brandBlack border border-brandLimeDark/30 rounded font-mono text-xs font-semibold">
+                  FRONTEND RECREATION
+                </span>
+              </div>
+              
+              <div class="bg-brandCanvas px-3 py-1.5 rounded-lg border border-brandBorder font-mono text-xs font-bold text-brandBlack flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brandLime pulse-indicator"></span>
+                <span id="countdown-timer">CALCULATING REMAINING TIME...</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+              <div class="lg:col-span-8">
+                <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-brandBlack mb-2">
+                  ReBuild '26
+                </h2>
+                <p class="text-sm text-brandMuted leading-relaxed max-w-2xl mb-4">
+                  Recreate the Landing, Login, Register, and Student Dashboard (My Events & Events) exactly as on the live portal. Submit before Friday 10:00 PM IST.
+                </p>
+                <div class="flex flex-wrap items-center gap-3 text-xs font-mono">
+                  <div class="bg-brandCanvas px-3 py-1.5 rounded border border-brandBorder text-brandBlack">
+                    TEAM TRACKING: <strong class="text-brandPurple font-bold">TEAM CAMPUSCODE</strong>
+                  </div>
+                  <button onclick="copyToClipboard('TEAM CAMPUSCODE', 'Tracking team name copied!')" class="text-xs font-mono text-brandMuted hover:text-brandBlack underline">
+                    Copy Name
+                  </button>
+                  <span class="text-brandBorder">•</span>
+                  <span class="text-brandMuted">VENUE: ONLINE (IST)</span>
+                </div>
+              </div>
+
+              <div class="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3">
+                <button onclick="openModal('submit-modal')" class="btn-primary w-full py-3 px-4 text-xs font-mono uppercase tracking-wider">
+                  Ready to Submit ↗
+                </button>
+                <a href="index.html" class="btn-outline w-full py-3 px-4 text-xs font-mono uppercase tracking-wider text-center">
+                  Review Live Specs
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="cc-card p-5">
+            <span class="font-mono text-xs text-brandMuted uppercase tracking-wider">REGISTERED</span>
+            <div class="text-3xl sm:text-4xl font-black text-brandBlack mt-1">03</div>
+            <span class="text-[11px] font-mono text-brandPurple mt-1 block">Active Student Hackathons</span>
+          </div>
+
+          <div class="cc-card p-5">
+            <span class="font-mono text-xs text-brandMuted uppercase tracking-wider">ONGOING ROUND</span>
+            <div class="text-3xl sm:text-4xl font-black text-brandPurple mt-1">01</div>
+            <span class="text-[11px] font-mono text-brandLimeDark font-semibold mt-1 block">Round 1 (Ends 10 PM)</span>
+          </div>
+
+          <div class="cc-card p-5">
+            <span class="font-mono text-xs text-brandMuted uppercase tracking-wider">SUBMISSIONS</span>
+            <div class="text-3xl sm:text-4xl font-black text-brandBlack mt-1">02</div>
+            <span class="text-[11px] font-mono text-brandMuted mt-1 block">Verified & Evaluated</span>
+          </div>
+
+          <div class="cc-card p-5">
+            <span class="font-mono text-xs text-brandMuted uppercase tracking-wider">CERTIFICATES</span>
+            <div class="text-3xl sm:text-4xl font-black text-brandBlack mt-1">01</div>
+            <span class="text-[11px] font-mono text-brandLimeDark font-semibold mt-1 block">Digital QR Verified</span>
+          </div>
+        </div>
+
+        
+        <div class="bg-white border border-brandBorder rounded-2xl p-6 sm:p-8">
+          
+          <!-- Tab Navigation Bar -->
+          <div class="flex flex-wrap items-center justify-between gap-4 border-b border-brandBorder pb-4 mb-6">
+            <div class="flex items-center gap-2">
+              <button 
+                id="tab-btn-my" 
+                onclick="switchTab('my-events')" 
+                class="px-4 py-2 rounded-lg font-mono text-xs uppercase tracking-wider font-bold transition-all bg-brandBlack text-white shadow-sm flex items-center gap-2"
+              >
+                <span>MY EVENTS.</span>
+                <span class="bg-white/20 px-1.5 py-0.5 rounded text-[10px]">03</span>
+              </button>
+
+              <button 
+                id="tab-btn-all" 
+                onclick="switchTab('all-events')" 
+                class="px-4 py-2 rounded-lg font-mono text-xs uppercase tracking-wider font-semibold transition-all bg-brandCanvas text-brandMuted hover:text-brandBlack hover:bg-gray-200/60 flex items-center gap-2"
+              >
+                <span>ALL EVENTS (EXPLORE)</span>
+                <span class="text-[10px] text-brandPurple">↗</span>
+              </button>
+            </div>
+
+            <div class="font-mono text-xs text-brandMuted flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-brandLime"></span>
+              <span>FILTER: ALL ACTIVE ARENAS</span>
+            </div>
+          </div>
+
+          <div id="content-my-events" class="space-y-4">
+            
+            <div class="p-5 border border-brandBorder rounded-xl hover:border-brandPurple/60 transition-all bg-brandCanvas/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-lg bg-brandBlack text-white flex items-center justify-center font-black text-sm font-mono shrink-0">
+                  R26
+                </div>
+                <div>
+                  <div class="flex items-center gap-2 mb-1">
+                    <h3 class="font-black text-lg text-brandBlack">ReBuild '26</h3>
+                    <span class="px-2 py-0.5 bg-brandLime/20 text-brandBlack border border-brandLimeDark/30 rounded text-[10px] font-mono font-bold">
+                      ROUND 1 IN PROGRESS
+                    </span>
+                  </div>
+                  <p class="text-xs text-brandMuted font-mono">
+                    Deadline: Tonight 10:00 PM IST • Frontend Recreation (4 Pages)
+                  </p>
+                  <div class="mt-2 flex items-center gap-3 text-[11px] font-mono text-brandMuted">
+                    <span>TRACKING: TEAM CAMPUSCODE</span>
+                    <span>•</span>
+                    <span class="text-brandLimeDark font-semibold">ALL 4 PAGES READY</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 w-full md:w-auto">
+                <button onclick="openModal('submit-modal')" class="btn-primary w-full md:w-auto px-4 py-2 text-xs font-mono uppercase tracking-wider">
+                  Open Submission Form ↗
+                </button>
+              </div>
+            </div>
+
+            <!-- Event Item 2: FirstCommit '26 Quiz Competition 2.0 -->
+            <div class="p-5 border border-brandBorder rounded-xl hover:border-brandBorder/80 transition-all bg-white flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-lg bg-brandPurple/10 text-brandPurple border border-brandPurple/20 flex items-center justify-center font-black text-sm font-mono shrink-0">
+                  FC2
+                </div>
+                <div>
+                  <div class="flex items-center gap-2 mb-1">
+                    <h3 class="font-bold text-lg text-brandBlack">FirstCommit '26 Quiz Competition 2.0</h3>
+                    <span class="px-2 py-0.5 bg-gray-100 text-gray-700 rounded text-[10px] font-mono font-bold">
+                      COMPLETED
+                    </span>
+                  </div>
+                  <p class="text-xs text-brandMuted font-mono">
+                    Score: 94 / 100 • Evaluated • Top 3% Percentile
+                  </p>
+                  <div class="mt-2 flex items-center gap-3 text-[11px] font-mono text-brandMuted">
+                    <span>TRACK: FULLSTACK & CS CONCEPTS</span>
+                    <span>•</span>
+                    <span class="text-brandPurple font-semibold">CERTIFICATE ISSUED</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 w-full md:w-auto">
+                <button onclick="showToast('Verifiable certificate downloaded (PDF + QR)', 'success')" class="btn-outline w-full md:w-auto px-4 py-2 text-xs font-mono uppercase tracking-wider">
+                  Download Certificate ↗
+                </button>
+              </div>
+            </div>
+
+            <div class="p-5 border border-brandBorder rounded-xl hover:border-brandBorder/80 transition-all bg-white flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-lg bg-gray-100 text-gray-700 flex items-center justify-center font-black text-sm font-mono shrink-0">
+                  CT
+                </div>
+                <div>
+                  <div class="flex items-center gap-2 mb-1">
+                    <h3 class="font-bold text-lg text-brandBlack">CampusTech AI Innovation Challenge</h3>
+                    <span class="px-2 py-0.5 bg-brandPurple/10 text-brandPurple rounded text-[10px] font-mono font-bold">
+                      ROUND 2 SHORTLISTED
+                    </span>
+                  </div>
+                  <p class="text-xs text-brandMuted font-mono">
+                    Evaluation Track: Artificial Intelligence • Project Under Review
+                  </p>
+                  <div class="mt-2 flex items-center gap-3 text-[11px] font-mono text-brandMuted">
+                    <span>SUBMISSION: GITHUB + LIVE AGENT DEMO</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 w-full md:w-auto">
+                <button onclick="showToast('Project score: 91/100. Organizers review pending.')" class="btn-outline w-full md:w-auto px-4 py-2 text-xs font-mono uppercase tracking-wider">
+                  View Assessment
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <div id="content-all-events" class="hidden space-y-4">
+            
+            <div class="p-4 bg-brandCanvas border border-brandBorder rounded-xl flex items-center justify-between mb-4">
+              <input 
+                type="text" 
+                id="search-events-input" 
+                oninput="filterEventsCatalog()" 
+                placeholder="Search hackathons, AI tracks, college cups..." 
+                class="bg-white border border-brandBorder rounded-lg px-4 py-2 text-xs font-sans w-full max-w-md focus:outline-none focus:border-brandPurple"
+              >
+              <div class="text-xs font-mono text-brandMuted hidden sm:block">SHOWING 4 EVENTS</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="events-grid">
+              
+              <div class="p-5 border border-brandBorder rounded-xl cc-card bg-white event-item" data-title="ReBuild '26">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="px-2 py-0.5 bg-brandLime/20 text-brandBlack rounded font-mono text-[10px] font-bold">ACTIVE NOW</span>
+                  <span class="font-mono text-xs font-bold text-brandPurple">₹15,000 STIPEND</span>
+                </div>
+                <h4 class="font-black text-xl text-brandBlack mb-1">ReBuild '26</h4>
+                <p class="text-xs text-brandMuted mb-4">The ultimate Recreate & Rebuild hackathon for students. Individual competition.</p>
+                <div class="flex items-center justify-between pt-3 border-t border-brandBorder text-xs font-mono">
+                  <span class="text-brandMuted">ENDS: 10:00 PM IST</span>
+                  <span class="text-brandPurple font-semibold">REGISTERED ✓</span>
+                </div>
+              </div>
+
+              <div class="p-5 border border-brandBorder rounded-xl cc-card bg-white event-item" data-title="FirstCommit '26">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="px-2 py-0.5 bg-gray-100 text-gray-700 rounded font-mono text-[10px] font-bold">ANNUAL ARENA</span>
+                  <span class="font-mono text-xs font-bold text-brandBlack">CASH & MENTORSHIP</span>
+                </div>
+                <h4 class="font-black text-xl text-brandBlack mb-1">FirstCommit '26</h4>
+                <p class="text-xs text-brandMuted mb-4">Chennai student developer championship featuring AI, Web, and Cloud tracks.</p>
+                <div class="flex items-center justify-between pt-3 border-t border-brandBorder text-xs font-mono">
+                  <span class="text-brandMuted">SEASON FINALE</span>
+                  <button onclick="showToast('You are already registered for FirstCommit', 'info')" class="text-brandPurple font-semibold hover:underline">VIEW TRACKS ↗</button>
+                </div>
+              </div>
+
+              <div class="p-5 border border-brandBorder rounded-xl cc-card bg-white event-item" data-title="GenAI Agents Challenge">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="px-2 py-0.5 bg-brandPurple/10 text-brandPurple rounded font-mono text-[10px] font-bold">UPCOMING</span>
+                  <span class="font-mono text-xs font-bold text-brandPurple">₹25,000 POOL</span>
+                </div>
+                <h4 class="font-black text-xl text-brandBlack mb-1">GenAI Agents Hackfest</h4>
+                <p class="text-xs text-brandMuted mb-4">Build autonomous AI assistants using LLM function calling and client sandboxes.</p>
+                <div class="flex items-center justify-between pt-3 border-t border-brandBorder text-xs font-mono">
+                  <span class="text-brandMuted">STARTS: 20 NOV</span>
+                  <button onclick="showToast('Registration opens Nov 12', 'info')" class="text-brandBlack font-semibold hover:text-brandPurple">REGISTER (FREE) ↗</button>
+                </div>
+              </div>
+
+              <div class="p-5 border border-brandBorder rounded-xl cc-card bg-white event-item" data-title="CampusTech Chennai">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="px-2 py-0.5 bg-gray-100 text-gray-700 rounded font-mono text-[10px] font-bold">HYBRID</span>
+                  <span class="font-mono text-xs font-bold text-brandBlack">INCUBATION</span>
+                </div>
+                <h4 class="font-black text-xl text-brandBlack mb-1">CampusTech Arena 2026</h4>
+                <p class="text-xs text-brandMuted mb-4">College-level engineering cup with peer review and live demo day in Chennai.</p>
+                <div class="flex items-center justify-between pt-3 border-t border-brandBorder text-xs font-mono">
+                  <span class="text-brandMuted">STARTS: DEC 2026</span>
+                  <button onclick="showToast('Notification alert set!', 'success')" class="text-brandBlack font-semibold hover:text-brandPurple">NOTIFY ME ↗</button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <div id="digital-id-modal" class="modal-overlay fixed inset-0 bg-brandBlack/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white border border-brandBorder rounded-2xl max-w-md w-full p-6 sm:p-8 relative shadow-2xl animate-in fade-in zoom-in duration-200">
+      
+      <div class="flex justify-between items-center mb-6 pb-3 border-b border-brandBorder">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center">
+            <span class="logo-slash slash-black" style="height: 14px; width: 3px;"></span>
+            <span class="logo-slash slash-purple" style="height: 14px; width: 3px;"></span>
+            <span class="logo-slash slash-lime" style="height: 14px; width: 3px;"></span>
+          </div>
+          <span class="font-mono text-xs font-bold text-brandBlack">CAMPUSCODE DIGITAL ID</span>
+        </div>
+        <button onclick="closeModal('digital-id-modal')" class="text-brandMuted hover:text-brandBlack font-mono text-base font-bold">✕</button>
+      </div>
+
+      <div class="bg-brandCanvas border-2 border-brandBorder rounded-xl p-6 text-center relative overflow-hidden">
+        <div class="w-20 h-20 mx-auto rounded-full bg-brandPurple/10 border-2 border-brandPurple flex items-center justify-center text-brandPurple font-extrabold text-2xl font-mono mb-3">
+          SA
+        </div>
+        <h3 id="modal-user-name" class="font-black text-xl text-brandBlack">SAI</h3>
+        <p class="text-xs font-mono text-brandMuted mt-0.5">VERIFIED STUDENT BUILDER</p>
+
+        <div class="mt-4 p-3 bg-white border border-brandBorder rounded-lg inline-block shadow-sm">
+          <svg class="w-36 h-36 mx-auto" viewBox="0 0 100 100" fill="none">
+            <rect width="100" height="100" fill="white"/>
+            <rect x="5" y="5" width="26" height="26" stroke="#111111" stroke-width="4"/>
+            <rect x="11" y="11" width="14" height="14" fill="#7665ff"/>
+            <rect x="69" y="5" width="26" height="26" stroke="#111111" stroke-width="4"/>
+            <rect x="75" y="11" width="14" height="14" fill="#111111"/>
+            <rect x="5" y="69" width="26" height="26" stroke="#111111" stroke-width="4"/>
+            <rect x="11" y="75" width="14" height="14" fill="#a8e62e"/>
+            <rect x="36" y="8" width="6" height="6" fill="#111111"/>
+            <rect x="46" y="14" width="6" height="6" fill="#7665ff"/>
+            <rect x="56" y="8" width="6" height="6" fill="#111111"/>
+            <rect x="36" y="24" width="6" height="6" fill="#111111"/>
+            <rect x="48" y="26" width="6" height="6" fill="#a8e62e"/>
+            <rect x="8" y="38" width="6" height="6" fill="#111111"/>
+            <rect x="20" y="44" width="6" height="6" fill="#7665ff"/>
+            <rect x="36" y="40" width="8" height="8" fill="#111111"/>
+            <rect x="48" y="42" width="6" height="6" fill="#111111"/>
+            <rect x="60" y="38" width="6" height="6" fill="#7665ff"/>
+            <rect x="72" y="44" width="8" height="8" fill="#111111"/>
+            <rect x="86" y="38" width="6" height="6" fill="#111111"/>
+            <rect x="38" y="58" width="6" height="6" fill="#111111"/>
+            <rect x="48" y="54" width="6" height="6" fill="#a8e62e"/>
+            <rect x="62" y="58" width="6" height="6" fill="#111111"/>
+            <rect x="74" y="62" width="6" height="6" fill="#7665ff"/>
+            <rect x="38" y="72" width="6" height="6" fill="#111111"/>
+            <rect x="48" y="78" width="6" height="6" fill="#7665ff"/>
+            <rect x="60" y="72" width="6" height="6" fill="#111111"/>
+            <rect x="76" y="76" width="6" height="6" fill="#111111"/>
+            <rect x="86" y="72" width="6" height="6" fill="#a8e62e"/>
+          </svg>
+          <div class="font-mono text-[9px] text-brandMuted mt-1 tracking-widest">
+            ID: CC-2026-8941
+          </div>
+        </div>
+
+        <div class="mt-4 flex items-center justify-center gap-2 text-xs font-mono text-brandBlack font-semibold">
+          <span class="w-2 h-2 rounded-full bg-brandLime"></span>
+          <span>UNSTOP & CAMPUSCODE VERIFIED</span>
+        </div>
+      </div>
+
+      <div class="mt-6 flex gap-3">
+        <button onclick="showToast('Digital ID card saved as PNG'); closeModal('digital-id-modal');" class="btn-primary w-full py-2.5 text-xs font-mono uppercase tracking-wider">
+          Download ID Pass
+        </button>
+        <button onclick="closeModal('digital-id-modal')" class="btn-outline w-full py-2.5 text-xs font-mono uppercase tracking-wider">
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="submit-modal" class="modal-overlay fixed inset-0 bg-brandBlack/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white border border-brandBorder rounded-2xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl animate-in fade-in zoom-in duration-200">
+      
+      <div class="flex justify-between items-center mb-6 pb-3 border-b border-brandBorder">
+        <div>
+          <span class="font-mono text-xs text-brandPurple font-bold uppercase">REBUILD '26 PORTAL</span>
+          <h3 class="text-xl font-black text-brandBlack">SUBMISSION CHECKLIST</h3>
+        </div>
+        <button onclick="closeModal('submit-modal')" class="text-brandMuted hover:text-brandBlack font-mono text-base font-bold">✕</button>
+      </div>
+
+      <p class="text-xs text-brandMuted leading-relaxed mb-4 font-mono">
+        Submit these items on the official CampusCode portal before <strong>10:00 PM IST</strong>:
+      </p>
+
+      <div class="space-y-3 font-mono text-xs mb-6">
+        <div class="p-3 bg-brandCanvas border border-brandBorder rounded-lg flex items-center justify-between">
+          <span>1. GitHub Repository Link (Public)</span>
+          <span class="text-brandLimeDark font-bold">READY ✓</span>
+        </div>
+        <div class="p-3 bg-brandCanvas border border-brandBorder rounded-lg flex items-center justify-between">
+          <span>2. Working Live Demo Link (Vercel / Netlify)</span>
+          <span class="text-brandLimeDark font-bold">READY ✓</span>
+        </div>
+        <div class="p-3 bg-brandCanvas border border-brandBorder rounded-lg flex items-center justify-between">
+          <span>3. Note for the Organizer</span>
+          <span class="text-brandPurple font-bold">PRE-WRITTEN ✓</span>
+        </div>
+        <div class="p-3 bg-brandCanvas border border-brandBorder rounded-lg flex items-center justify-between">
+          <span>4. PDF Link (Optional, Public Google Drive)</span>
+          <span class="text-brandMuted">OPTIONAL</span>
+        </div>
+      </div>
+
+      <div class="p-3 bg-brandLime/10 border border-brandLimeDark/20 rounded-lg text-[11px] font-mono text-brandBlack mb-6">
+        <strong>RULE REMINDER:</strong> Submissions go on the CampusCode portal only — not in the WhatsApp group. What is live at 10:00 PM is what gets judged.
+      </div>
+
+      <div class="flex gap-3">
+        <button onclick="showToast('Copied tracking team name: TEAM CAMPUSCODE', 'success')" class="btn-primary w-full py-2.5 text-xs font-mono uppercase tracking-wider">
+          Copy Team Name
+        </button>
+        <button onclick="closeModal('submit-modal')" class="btn-outline w-full py-2.5 text-xs font-mono uppercase tracking-wider">
+          Done
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    function switchTab(tab) {
+      const myBtn = document.getElementById('tab-btn-my');
+      const allBtn = document.getElementById('tab-btn-all');
+      const myContent = document.getElementById('content-my-events');
+      const allContent = document.getElementById('content-all-events');
+      const navMy = document.getElementById('nav-my-events');
+      const navAll = document.getElementById('nav-all-events');
+      const navOverview = document.getElementById('nav-overview');
+
+      if (tab === 'my-events') {
+        myBtn.className = "px-4 py-2 rounded-lg font-mono text-xs uppercase tracking-wider font-bold transition-all bg-brandBlack text-white shadow-sm flex items-center gap-2";
+        allBtn.className = "px-4 py-2 rounded-lg font-mono text-xs uppercase tracking-wider font-semibold transition-all bg-brandCanvas text-brandMuted hover:text-brandBlack hover:bg-gray-200/60 flex items-center gap-2";
+        myContent.classList.remove('hidden');
+        allContent.classList.add('hidden');
+      } else if (tab === 'all-events') {
+        allBtn.className = "px-4 py-2 rounded-lg font-mono text-xs uppercase tracking-wider font-bold transition-all bg-brandBlack text-white shadow-sm flex items-center gap-2";
+        myBtn.className = "px-4 py-2 rounded-lg font-mono text-xs uppercase tracking-wider font-semibold transition-all bg-brandCanvas text-brandMuted hover:text-brandBlack hover:bg-gray-200/60 flex items-center gap-2";
+        allContent.classList.remove('hidden');
+        myContent.classList.add('hidden');
+      } else if (tab === 'overview') {
+        switchTab('my-events');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function filterEventsCatalog() {
+      const query = document.getElementById('search-events-input').value.toLowerCase();
+      const items = document.querySelectorAll('.event-item');
+      items.forEach(item => {
+        const title = item.getAttribute('data-title').toLowerCase();
+        const text = item.innerText.toLowerCase();
+        if (title.includes(query) || text.includes(query)) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = Auth.getUser();
+      const welcomeEl = document.getElementById('welcome-username');
+      const modalNameEl = document.getElementById('modal-user-name');
+      const ccIdEl = document.getElementById('user-cc-id');
+
+      if (user && user.fullName) {
+        welcomeEl.innerText = user.fullName.toUpperCase();
+        if (modalNameEl) modalNameEl.innerText = user.fullName.toUpperCase();
+      }
+
+      if (user && user.studentId && ccIdEl) {
+        ccIdEl.innerText = user.studentId;
+      }
+
+      initCountdown('countdown-timer');
+    });
+  </script>
+</body>
+</html>

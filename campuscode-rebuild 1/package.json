@@ -1,0 +1,17 @@
+{
+  "name": "campuscode-rebuild-26",
+  "version": "1.0.0",
+  "description": "Faithful desktop recreation of CampusCode portal for ReBuild '26 Round 1",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "keywords": [
+    "campuscode",
+    "rebuild26",
+    "hackathon",
+    "frontend"
+  ],
+  "author": "Sai",
+  "license": "MIT"
+}
